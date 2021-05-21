@@ -22,33 +22,25 @@ class IconBtn extends StatelessWidget {
 
   /// Creates button with [icon] different
   /// depends on [MaterialApp] or [CupertinoApp] ancestor.
-  const IconBtn({
-    Key key,
-    @required this.icon,
-    this.onTap,
-    this.tooltip
-  }) : super(key: key);
+  const IconBtn({Key key, @required this.icon, this.onTap, this.tooltip})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    bool isMaterial =  Material.of(context) != null;
+    bool isMaterial = Material.of(context) != null;
 
-    return isMaterial
-      ? _materialBtn()
-      : _cupertinoBtn();
+    return isMaterial ? _materialBtn() : _cupertinoBtn();
   }
 
-  Widget _cupertinoBtn() =>
-      CupertinoButton(
+  Widget _cupertinoBtn() => CupertinoButton(
         padding: const EdgeInsets.all(0.0),
         child: icon,
         onPressed: onTap,
       );
 
-  Widget _materialBtn() =>
-     IconButton(
-       icon: icon,
-       tooltip: tooltip ?? "",
-       onPressed: onTap,
-    );
+  Widget _materialBtn() => IconButton(
+        icon: Icon(Icons.ac_unit),
+        tooltip: tooltip ?? "",
+        onPressed: onTap,
+      );
 }
