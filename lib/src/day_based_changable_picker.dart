@@ -162,9 +162,7 @@ class _DayBasedChangeablePickerState<T>
           return Expanded(
             child: Column(
               children: <Widget>[
-                SizedBox(
-                    height: widget.datePickerLayoutSettings.dayPickerRowHeight,
-                    child: _buildMonthNavigationRow()),
+                SizedBox(child: _buildMonthNavigationRow()),
                 Expanded(
                   child: Semantics(
                     sortKey: MonthPickerSortKey.calendar,
