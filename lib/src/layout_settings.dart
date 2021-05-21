@@ -3,9 +3,6 @@ import 'dart:math' as math;
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'day_picker.dart';
-import 'month_picker.dart';
-import 'range_picker.dart';
-import 'week_picker.dart';
 
 // layout defaults
 const Duration _kPageScrollDuration = Duration(milliseconds: 200);
@@ -13,7 +10,7 @@ const double _kDayPickerRowHeight = 42.0;
 const int _kMaxDayPickerRowCount = 6; // A 31 day month that starts on Saturday.
 const double _kMonthPickerPortraitWidth = 330.0;
 const EdgeInsetsGeometry _kContentPadding =
-    EdgeInsets.symmetric(horizontal: 8.0);
+    EdgeInsets.symmetric(horizontal: 2.0);
 
 /// Settings for the layout of the [DayPicker], [WeekPicker], [RangePicker]
 /// and [MonthPicker].
@@ -69,16 +66,16 @@ class DatePickerLayoutSettings {
   ///
   /// Usually used in [DayPicker], [WeekPicker], [RangePicker]
   /// and [MonthPicker].
-  const DatePickerLayoutSettings({
-    this.pagesScrollDuration = _kPageScrollDuration,
-    this.dayPickerRowHeight = _kDayPickerRowHeight,
-    this.monthPickerPortraitWidth = _kMonthPickerPortraitWidth,
-    this.maxDayPickerRowCount = _kMaxDayPickerRowCount,
-    this.contentPadding = _kContentPadding,
-    this.showNextMonthStart = false,
-    this.showPrevMonthEnd = false,
-    this.scrollPhysics
-  }) : assert(pagesScrollDuration != null),
+  const DatePickerLayoutSettings(
+      {this.pagesScrollDuration = _kPageScrollDuration,
+      this.dayPickerRowHeight = _kDayPickerRowHeight,
+      this.monthPickerPortraitWidth = _kMonthPickerPortraitWidth,
+      this.maxDayPickerRowCount = _kMaxDayPickerRowCount,
+      this.contentPadding = _kContentPadding,
+      this.showNextMonthStart = false,
+      this.showPrevMonthEnd = false,
+      this.scrollPhysics})
+      : assert(pagesScrollDuration != null),
         assert(dayPickerRowHeight != null),
         assert(monthPickerPortraitWidth != null),
         assert(maxDayPickerRowCount != null),
@@ -86,7 +83,6 @@ class DatePickerLayoutSettings {
         assert(showNextMonthStart != null),
         assert(showPrevMonthEnd != null);
 }
-
 
 class _DayPickerGridDelegate extends SliverGridDelegate {
   final double _dayPickerRowHeight;

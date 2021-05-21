@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'day_picker.dart' as day_picker;
 import 'icon_btn.dart';
-import 'range_picker.dart';
 import 'semantic_sorting.dart';
-import 'week_picker.dart';
 
 /// Month navigation widget for day based date pickers like
 /// [day_picker.DayPicker],
@@ -45,18 +43,18 @@ class MonthNavigationRow extends StatelessWidget {
   final Widget title;
 
   /// Creates month navigation row.
-  const MonthNavigationRow({
-    Key key,
-    this.previousPageIconKey,
-    this.nextPageIconKey,
-    this.onNextMonthTapped,
-    this.onPreviousMonthTapped,
-    this.nextMonthTooltip,
-    this.previousMonthTooltip,
-    this.title,
-    @required this.nextIcon,
-    @required this.prevIcon
-  }) : assert(nextIcon != null),
+  const MonthNavigationRow(
+      {Key key,
+      this.previousPageIconKey,
+      this.nextPageIconKey,
+      this.onNextMonthTapped,
+      this.onPreviousMonthTapped,
+      this.nextMonthTooltip,
+      this.previousMonthTooltip,
+      this.title,
+      @required this.nextIcon,
+      @required this.prevIcon})
+      : assert(nextIcon != null),
         assert(prevIcon != null),
         super(key: key);
 

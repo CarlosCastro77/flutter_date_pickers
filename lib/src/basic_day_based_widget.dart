@@ -64,7 +64,6 @@ class DayBasedPicker<T> extends StatelessWidget with CommonDatePickerFunctions {
         assert(datePickerStyles != null),
         super(key: key);
 
-
   @override
   Widget build(BuildContext context) {
     final MaterialLocalizations localizations =
@@ -88,7 +87,7 @@ class DayBasedPicker<T> extends StatelessWidget with CommonDatePickerFunctions {
         children: <Widget>[
           Flexible(
             child: GridView.custom(
-              physics: datePickerLayoutSettings.scrollPhysics,
+              physics: NeverScrollableScrollPhysics(),
               gridDelegate: datePickerLayoutSettings.dayPickerGridDelegate,
               childrenDelegate:
                   SliverChildListDelegate(labels, addRepaintBoundaries: false),
@@ -105,8 +104,8 @@ class DayBasedPicker<T> extends StatelessWidget with CommonDatePickerFunctions {
 
     DayHeaderStyleBuilder dayHeaderStyleBuilder =
         datePickerStyles.dayHeaderStyleBuilder ??
-                // ignore: avoid_types_on_closure_parameters
-                (int i) => datePickerStyles.dayHeaderStyle;
+            // ignore: avoid_types_on_closure_parameters
+            (int i) => datePickerStyles.dayHeaderStyle;
 
     List<Widget> headers = getDayHeaders(dayHeaderStyleBuilder,
         localizations.narrowWeekdays, firstDayOfWeekIndex);
@@ -122,26 +121,23 @@ class DayBasedPicker<T> extends StatelessWidget with CommonDatePickerFunctions {
     final int firstDayOfWeekIndex = datePickerStyles.firstDayOfeWeekIndex ??
         localizations.firstDayOfWeekIndex;
     final int firstDayOffset =
-      computeFirstDayOffset(year, month, firstDayOfWeekIndex);
+        computeFirstDayOffset(year, month, firstDayOfWeekIndex);
 
     final bool showDates = datePickerLayoutSettings.showPrevMonthEnd;
     if (showDates) {
       int prevMonth = month - 1;
       if (prevMonth < 1) prevMonth = 12;
-      int prevYear = prevMonth == 12
-        ? year - 1
-        : year;
+      int prevYear = prevMonth == 12 ? year - 1 : year;
 
       int daysInPrevMonth = DatePickerUtils.getDaysInMonth(prevYear, prevMonth);
-      List<Widget> days = List
-          .generate(firstDayOffset, (index) => index)
+      List<Widget> days = List.generate(firstDayOffset, (index) => index)
           .reversed
           .map((i) => daysInPrevMonth - i)
           .map((day) => _buildCell(prevYear, prevMonth, day))
           .toList();
 
       result = days;
-    } else  {
+    } else {
       result = List.generate(firstDayOffset, (_) => const SizedBox.shrink());
     }
 
@@ -173,11 +169,11 @@ class DayBasedPicker<T> extends StatelessWidget with CommonDatePickerFunctions {
     final int firstDayOfWeekIndex = datePickerStyles.firstDayOfeWeekIndex ??
         localizations.firstDayOfWeekIndex;
     final int firstDayOffset =
-      computeFirstDayOffset(year, month, firstDayOfWeekIndex);
+        computeFirstDayOffset(year, month, firstDayOfWeekIndex);
     final int daysInMonth = DatePickerUtils.getDaysInMonth(year, month);
     final int totalFilledDays = firstDayOffset + daysInMonth;
 
-    int reminder =  totalFilledDays % 7;
+    int reminder = totalFilledDays % 7;
     if (reminder == 0) return result;
     final int emptyCellsNum = 7 - reminder;
 
@@ -229,7 +225,6 @@ class DayBasedPicker<T> extends StatelessWidget with CommonDatePickerFunctions {
   }
 }
 
-
 class _DayCell extends StatelessWidget {
   /// Day for this cell.
   final DateTime day;
@@ -249,24 +244,23 @@ class _DayCell extends StatelessWidget {
   /// except days with dayType is [DayType.notSelected].
   final EventDecorationBuilder eventDecorationBuilder;
 
-  const _DayCell({
-    Key key,
-    @required this.day,
-    @required this.selectablePicker,
-    @required this.datePickerStyles,
-    @required this.currentDate,
-    this.eventDecorationBuilder
-  }) : assert(day != null),
-       assert(selectablePicker != null),
-       assert(datePickerStyles != null),
-       assert(currentDate != null),
-       super(key: key);
-
+  const _DayCell(
+      {Key key,
+      @required this.day,
+      @required this.selectablePicker,
+      @required this.datePickerStyles,
+      @required this.currentDate,
+      this.eventDecorationBuilder})
+      : assert(day != null),
+        assert(selectablePicker != null),
+        assert(datePickerStyles != null),
+        assert(currentDate != null),
+        super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final MaterialLocalizations localizations =
-    MaterialLocalizations.of(context);
+        MaterialLocalizations.of(context);
 
     DayType dayType = selectablePicker.getDayType(day);
 
@@ -298,8 +292,8 @@ class _DayCell extends StatelessWidget {
     String semanticLabel = '${localizations.formatDecimal(day.day)}, '
         '${localizations.formatFullDate(day)}';
 
-    bool daySelected = dayType != DayType.disabled
-        && dayType != DayType.notSelected;
+    bool daySelected =
+        dayType != DayType.disabled && dayType != DayType.notSelected;
 
     Widget dayWidget = Container(
       decoration: decoration,

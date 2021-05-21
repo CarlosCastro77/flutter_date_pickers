@@ -11,25 +11,24 @@ import 'layout_settings.dart';
 
 /// Date picker for selection one day.
 class DayPicker<T> extends StatelessWidget {
-
   /// Creates a day picker where only one single day can be selected.
   ///
   /// See also:
   /// * [DayPicker.multi] - day picker where many single days can be selected.
-  DayPicker.single({Key key,
-    @required DateTime selectedDate,
-    @required this.onChanged,
-    @required this.firstDate,
-    @required this.lastDate,
-    this.datePickerLayoutSettings = const DatePickerLayoutSettings(),
-    this.datePickerStyles,
-    this.datePickerKeys,
-    this.selectableDayPredicate,
-    this.eventDecorationBuilder,
-    this.onMonthChanged}) :
-        selection = DayPickerSingleSelection(selectedDate),
-        selectionLogic =  DaySelectable(
-            selectedDate, firstDate, lastDate,
+  DayPicker.single(
+      {Key key,
+      @required DateTime selectedDate,
+      @required this.onChanged,
+      @required this.firstDate,
+      @required this.lastDate,
+      this.datePickerLayoutSettings = const DatePickerLayoutSettings(),
+      this.datePickerStyles,
+      this.datePickerKeys,
+      this.selectableDayPredicate,
+      this.eventDecorationBuilder,
+      this.onMonthChanged})
+      : selection = DayPickerSingleSelection(selectedDate),
+        selectionLogic = DaySelectable(selectedDate, firstDate, lastDate,
             selectableDayPredicate: selectableDayPredicate),
         assert(selectedDate != null),
         assert(onChanged != null),
@@ -38,36 +37,6 @@ class DayPicker<T> extends StatelessWidget {
         assert(!selectedDate.isBefore(firstDate)),
         assert(!selectedDate.isAfter(lastDate)),
         super(key: key);
-
-
-  /// Creates a day picker  where many single days can be selected.
-  ///
-  /// See also:
-  /// * [DayPicker.single] - day picker where only one single day
-  /// can be selected.
-  DayPicker.multi({Key key,
-    @required List<DateTime> selectedDates,
-    @required this.onChanged,
-    @required this.firstDate,
-    @required this.lastDate,
-    this.datePickerLayoutSettings = const DatePickerLayoutSettings(),
-    this.datePickerStyles,
-    this.datePickerKeys,
-    this.selectableDayPredicate,
-    this.eventDecorationBuilder,
-    this.onMonthChanged}) :
-        selection = DayPickerMultiSelection(selectedDates),
-        selectionLogic =  DayMultiSelectable(
-            selectedDates, firstDate, lastDate,
-            selectableDayPredicate: selectableDayPredicate),
-        assert(selectedDates != null),
-        assert(onChanged != null),
-        assert(!firstDate.isAfter(lastDate)),
-        assert(!lastDate.isBefore(firstDate)),
-        // assert(!selection.isBefore(firstDate)),
-        // assert(!selection.isAfter(lastDate)),
-        super(key: key);
-
 
   /// The currently selected date.
   ///
@@ -107,7 +76,7 @@ class DayPicker<T> extends StatelessWidget {
 
   /// Logic to handle user's selections.
   final ISelectablePicker selectionLogic;
-  
+
   @override
   // ignore: prefer_expression_function_bodies
   Widget build(BuildContext context) {
