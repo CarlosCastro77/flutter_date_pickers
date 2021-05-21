@@ -8,8 +8,6 @@ import 'date_picker_keys.dart';
 import 'date_picker_styles.dart';
 import 'day_based_changeable_picker_presenter.dart';
 import 'day_picker_selection.dart';
-import 'day_type.dart';
-import 'event_decoration.dart';
 import 'i_selectable_picker.dart';
 import 'layout_settings.dart';
 import 'month_navigation_row.dart';
@@ -49,12 +47,6 @@ class DayBasedChangeablePicker<T> extends StatefulWidget {
   /// Logic for date selections.
   final ISelectablePicker<T> selectablePicker;
 
-  /// Builder to get event decoration for each date.
-  ///
-  /// All event styles are overridden by selected styles
-  /// except days with dayType is [DayType.notSelected].
-  final EventDecorationBuilder eventDecorationBuilder;
-
   /// Called when the user changes the month
   final ValueChanged<DateTime> onMonthChanged;
 
@@ -70,7 +62,6 @@ class DayBasedChangeablePicker<T> extends StatefulWidget {
       @required this.selectablePicker,
       this.datePickerKeys,
       this.onSelectionError,
-      this.eventDecorationBuilder,
       this.onMonthChanged})
       : assert(datePickerLayoutSettings != null),
         assert(datePickerStyles != null),
@@ -257,7 +248,6 @@ class _DayBasedChangeablePickerState<T>
       datePickerLayoutSettings: widget.datePickerLayoutSettings,
       selectedPeriodKey: widget.datePickerKeys?.selectedPeriodKeys,
       datePickerStyles: _resultStyles,
-      eventDecorationBuilder: widget.eventDecorationBuilder,
     );
   }
 

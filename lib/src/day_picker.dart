@@ -4,8 +4,6 @@ import 'date_picker_keys.dart';
 import 'date_picker_styles.dart';
 import 'day_based_changable_picker.dart';
 import 'day_picker_selection.dart';
-import 'day_type.dart';
-import 'event_decoration.dart';
 import 'i_selectable_picker.dart';
 import 'layout_settings.dart';
 
@@ -25,7 +23,6 @@ class DayPicker<T> extends StatelessWidget {
       this.datePickerStyles,
       this.datePickerKeys,
       this.selectableDayPredicate,
-      this.eventDecorationBuilder,
       this.onMonthChanged})
       : selection = DayPickerSingleSelection(selectedDate),
         selectionLogic = DaySelectable(selectedDate, firstDate, lastDate,
@@ -64,12 +61,6 @@ class DayPicker<T> extends StatelessWidget {
   /// Function returns if day can be selected or not.
   final SelectableDayPredicate selectableDayPredicate;
 
-  /// Builder to get event decoration for each date.
-  ///
-  /// All event styles are overriden by selected styles
-  /// except days with dayType is [DayType.notSelected].
-  final EventDecorationBuilder eventDecorationBuilder;
-
   // Called when the user changes the month.
   /// New DateTime object represents first day of new month and 00:00 time.
   final ValueChanged<DateTime> onMonthChanged;
@@ -89,7 +80,6 @@ class DayPicker<T> extends StatelessWidget {
       datePickerLayoutSettings: datePickerLayoutSettings,
       datePickerStyles: datePickerStyles ?? DatePickerStyles(),
       datePickerKeys: datePickerKeys,
-      eventDecorationBuilder: eventDecorationBuilder,
       onMonthChanged: onMonthChanged,
     );
   }

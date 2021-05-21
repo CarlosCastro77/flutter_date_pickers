@@ -2,9 +2,9 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
+import './enum/day_type.dart';
 import 'date_period.dart';
 import 'day_picker.dart' as day_picker;
-import 'day_type.dart';
 import 'unselectable_period_error.dart';
 import 'utils.dart';
 

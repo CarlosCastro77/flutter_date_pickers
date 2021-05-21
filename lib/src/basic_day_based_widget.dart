@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 
+import './enum/day_type.dart';
 import 'date_picker_mixin.dart';
 import 'date_picker_styles.dart';
-import 'day_type.dart';
-import 'event_decoration.dart';
 import 'i_selectable_picker.dart';
 import 'layout_settings.dart';
 import 'utils.dart';
@@ -37,12 +36,6 @@ class DayBasedPicker<T> extends StatelessWidget with CommonDatePickerFunctions {
   /// Styles what can be customized by user
   final DatePickerRangeStyles datePickerStyles;
 
-  /// Builder to get event decoration for each date.
-  ///
-  /// All event styles are overridden by selected styles
-  /// except days with dayType is [DayType.notSelected].
-  final EventDecorationBuilder eventDecorationBuilder;
-
   /// Creates main date picker view where every cell is day.
   DayBasedPicker(
       {Key key,
@@ -53,8 +46,7 @@ class DayBasedPicker<T> extends StatelessWidget with CommonDatePickerFunctions {
       @required this.datePickerLayoutSettings,
       @required this.selectedPeriodKey,
       @required this.datePickerStyles,
-      @required this.selectablePicker,
-      this.eventDecorationBuilder})
+      @required this.selectablePicker})
       : assert(currentDate != null),
         assert(displayedMonth != null),
         assert(datePickerLayoutSettings != null),
@@ -196,7 +188,6 @@ class DayBasedPicker<T> extends StatelessWidget with CommonDatePickerFunctions {
       currentDate: currentDate,
       selectablePicker: selectablePicker,
       datePickerStyles: datePickerStyles,
-      eventDecorationBuilder: eventDecorationBuilder,
     );
 
     if (dayType != DayType.disabled) {
@@ -238,19 +229,12 @@ class _DayCell extends StatelessWidget {
   /// The current date at the time the picker is displayed.
   final DateTime currentDate;
 
-  /// Builder to get event decoration for each date.
-  ///
-  /// All event styles are overridden by selected styles
-  /// except days with dayType is [DayType.notSelected].
-  final EventDecorationBuilder eventDecorationBuilder;
-
   const _DayCell(
       {Key key,
       @required this.day,
       @required this.selectablePicker,
       @required this.datePickerStyles,
-      @required this.currentDate,
-      this.eventDecorationBuilder})
+      @required this.currentDate})
       : assert(day != null),
         assert(selectablePicker != null),
         assert(datePickerStyles != null),
@@ -278,17 +262,6 @@ class _DayCell extends StatelessWidget {
       itemStyle = datePickerStyles.defaultDateTextStyle;
     }
 
-    // Merges decoration and textStyle with [EventDecoration].
-    //
-    // Merges only in cases if [dayType] is DayType.notSelected.
-    // If day is current day it is also gets event decoration
-    // instead of decoration for current date.
-    if (dayType == DayType.notSelected && eventDecorationBuilder != null) {
-      EventDecoration eDecoration = eventDecorationBuilder(day);
-      decoration = eDecoration?.boxDecoration ?? decoration;
-      itemStyle = eDecoration?.textStyle ?? itemStyle;
-    }
-
     String semanticLabel = '${localizations.formatDecimal(day.day)}, '
         '${localizations.formatFullDate(day)}';
 
@@ -296,6 +269,8 @@ class _DayCell extends StatelessWidget {
         dayType != DayType.disabled && dayType != DayType.notSelected;
 
     Widget dayWidget = Container(
+      height: 15,
+      width: 15,
       decoration: decoration,
       child: Center(
         child: Semantics(
