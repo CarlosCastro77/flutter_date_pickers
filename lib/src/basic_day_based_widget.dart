@@ -299,12 +299,6 @@ class _DayCell extends StatelessWidget {
       decoration: decoration,
       child: Center(
         child: Semantics(
-          // We want the day of month to be spoken first irrespective of the
-          // locale-specific preferences or TextDirection. This is because
-          // an accessibility user is more likely to be interested in the
-          // day of month before the rest of the date, as they are looking
-          // for the day of month. To do that we prepend day of month to the
-          // formatted full date.
           label: semanticLabel,
           selected: daySelected,
           child: ExcludeSemantics(

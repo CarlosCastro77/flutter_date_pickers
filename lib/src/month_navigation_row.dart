@@ -69,7 +69,7 @@ class MonthNavigationRow extends StatelessWidget {
           sortKey: MonthPickerSortKey.previousMonth,
           child: IconBtn(
             key: previousPageIconKey,
-            icon: Icon(Icons.ac_unit),
+            icon: prevIcon,
             tooltip: previousMonthTooltip,
             onTap: onPreviousMonthTapped,
           ),
