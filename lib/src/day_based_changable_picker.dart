@@ -159,9 +159,7 @@ class _DayBasedChangeablePickerState<T>
       child: Builder(
         builder: (c) {
           localizations = MaterialLocalizations.of(c);
-          return SizedBox(
-            width: widget.datePickerLayoutSettings.monthPickerPortraitWidth,
-            height: widget.datePickerLayoutSettings.maxDayPickerHeight,
+          return Expanded(
             child: Column(
               children: <Widget>[
                 SizedBox(
