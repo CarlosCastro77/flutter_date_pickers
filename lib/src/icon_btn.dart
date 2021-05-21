@@ -39,7 +39,7 @@ class IconBtn extends StatelessWidget {
       );
 
   Widget _materialBtn() => IconButton(
-        icon: Icon(Icons.ac_unit),
+        icon: icon,
         tooltip: tooltip ?? "",
         onPressed: onTap,
       );
