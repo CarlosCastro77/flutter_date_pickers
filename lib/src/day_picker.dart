@@ -23,10 +23,9 @@ class DayPicker<T> extends StatelessWidget {
       this.datePickerStyles,
       this.datePickerKeys,
       this.selectableDayPredicate,
-      this.onMonthChanged})
+      this.onMonthChanged,
+      this.selectionLogic})
       : selection = DayPickerSingleSelection(selectedDate),
-        selectionLogic = DaySelectable(selectedDate, firstDate, lastDate,
-            selectableDayPredicate: selectableDayPredicate),
         assert(selectedDate != null),
         assert(onChanged != null),
         assert(!firstDate.isAfter(lastDate)),

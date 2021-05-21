@@ -1,6 +1,3 @@
-import 'date_period.dart';
-import 'utils.dart';
-
 /// Base class for day based pickers selection.
 abstract class DayPickerSelection {
   /// If this is before [dateTime].
