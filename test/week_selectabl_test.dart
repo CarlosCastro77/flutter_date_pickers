@@ -1,4 +1,4 @@
-import 'package:flutter_date_pickers/src/day_type.dart';
+import 'package:flutter_date_pickers/src/enum/day_type.dart';
 import 'package:flutter_date_pickers/src/i_selectable_picker.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -15,8 +15,8 @@ void main() {
       final disabledDate = selectedDate.subtract(const Duration(days: 5));
 
       // ignore: prefer_function_declarations_over_variables
-      final selectablePredicate = (DateTime d)
-      => !DateTimeUtils.sameDate(d, disabledDate);
+      final selectablePredicate =
+          (DateTime d) => !DateTimeUtils.sameDate(d, disabledDate);
 
       final selectableLogic = WeekSelectable(
           selectedDate, firstDayOfWeekIndex, firstDate, lastDate,
@@ -28,11 +28,11 @@ void main() {
       final disabledDateType = selectableLogic.getDayType(disabledDate);
       expect(disabledDateType, DayType.disabled);
 
-      final weekStart = DateTimeUtils
-          .getFirstDayOfWeek(selectedDate, firstDayOfWeekIndex);
+      final weekStart =
+          DateTimeUtils.getFirstDayOfWeek(selectedDate, firstDayOfWeekIndex);
 
-      final weekEnd = DateTimeUtils
-          .getLastDayOfWeek(selectedDate, firstDayOfWeekIndex);
+      final weekEnd =
+          DateTimeUtils.getLastDayOfWeek(selectedDate, firstDayOfWeekIndex);
 
       final startPeriodDateType = selectableLogic.getDayType(weekStart);
       expect(startPeriodDateType, DayType.start);
@@ -42,8 +42,8 @@ void main() {
 
       // Count of the week days which is not start and not end (7 - 2).
       final middleDaysCount = 5;
-      final middleDates = List.generate(middleDaysCount,
-              (i) => weekStart.add(Duration(days: i + 1)));
+      final middleDates = List.generate(
+          middleDaysCount, (i) => weekStart.add(Duration(days: i + 1)));
 
       for (DateTime date in middleDates) {
         final middlePeriodDateType = selectableLogic.getDayType(date);

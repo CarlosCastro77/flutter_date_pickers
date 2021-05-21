@@ -1,4 +1,4 @@
-import 'package:flutter_date_pickers/src/day_type.dart';
+import 'package:flutter_date_pickers/src/enum/day_type.dart';
 import 'package:flutter_date_pickers/src/i_selectable_picker.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -19,8 +19,8 @@ void main() {
       final disabledDate = now.subtract(const Duration(days: 5));
 
       // ignore: prefer_function_declarations_over_variables
-      final selectablePredicate = (DateTime d)
-      => !DateTimeUtils.sameDate(d, disabledDate);
+      final selectablePredicate =
+          (DateTime d) => !DateTimeUtils.sameDate(d, disabledDate);
 
       final selectableLogic = DayMultiSelectable(
           selectedDates, firstDate, lastDate,
