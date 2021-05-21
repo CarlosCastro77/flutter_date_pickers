@@ -269,8 +269,8 @@ class _DayCell extends StatelessWidget {
         dayType != DayType.disabled && dayType != DayType.notSelected;
 
     Widget dayWidget = Container(
-      height: 15,
-      width: 15,
+      height: 10,
+      width: 10,
       decoration: decoration,
       child: Center(
         child: Semantics(

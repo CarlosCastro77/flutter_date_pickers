@@ -98,12 +98,6 @@ class _DayBasedChangeablePickerState<T>
     final int monthPage = _getInitPage();
     _dayPickerController = PageController(initialPage: monthPage);
 
-    _changesSubscription = widget.selectablePicker.onUpdate
-        .listen((newSelectedDate) => widget.onChanged?.call(newSelectedDate))
-          ..onError((e) => widget.onSelectionError != null
-              ? widget.onSelectionError(e)
-              : print(e.toString()));
-
     _updateCurrentDate();
   }
 
@@ -114,14 +108,6 @@ class _DayBasedChangeablePickerState<T>
     if (widget.datePickerStyles != oldWidget.datePickerStyles) {
       final ThemeData theme = Theme.of(context);
       _resultStyles = widget.datePickerStyles.fulfillWithTheme(theme);
-    }
-
-    if (widget.selectablePicker != oldWidget.selectablePicker) {
-      _changesSubscription = widget.selectablePicker.onUpdate
-          .listen((newSelectedDate) => widget.onChanged?.call(newSelectedDate))
-            ..onError((e) => widget.onSelectionError != null
-                ? widget.onSelectionError(e)
-                : print(e.toString()));
     }
   }
 
